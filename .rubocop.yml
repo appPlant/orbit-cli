@@ -23,6 +23,12 @@
 AllCops:
   TargetRubyVersion: 2.5
 
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
