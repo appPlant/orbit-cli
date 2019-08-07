@@ -61,7 +61,7 @@ module Orbit
       when 'export'
         Task::ExportTask.new
       else
-        Task::BaseTask.new
+        raise "unknown category: #{name}"
       end
     end
   end

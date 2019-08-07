@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class HelpTask < BaseTask
+    class HelpTask
       # Prints the usage help.
       #
       # @return [ Void ]

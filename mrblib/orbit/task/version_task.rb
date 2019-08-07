@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class VersionTask < BaseTask
+    class VersionTask
       # Initialize a new version task.
       #
       # @param [ Boolean ] advanced Show advanced version.

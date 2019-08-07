@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class ShellTask < BaseTask
+    class ShellTask
       # Raise an error of $ORBIT_HOME is not defined.
       #
       # @return [ Void ]

@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class EnvTask < BaseTask
+    class EnvTask
       # Print the env variables.
       #
       # @return [ Void ]
