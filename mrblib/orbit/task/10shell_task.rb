@@ -33,6 +33,8 @@ module Orbit
       def spawn(bin, *args, blacklist: nil)
         raise_if_blacklisted(args, blacklist)
         Process.spawn ENV.to_hash, binpath(bin), *args
+      rescue RuntimeError
+        abort "command not found: #{bin}", 127
       end
 
       # Replace the process by running the given external command.
@@ -45,6 +47,8 @@ module Orbit
       def exec(bin, *args, blacklist: nil)
         raise_if_blacklisted(args, blacklist)
         Process.exec ENV.to_hash, binpath(bin), *args
+      rescue RuntimeError
+        abort "command not found: #{bin}", 127
       end
 
       # Send SIGINT to kill the process.
