@@ -63,6 +63,15 @@ assert('env') do
   end
 end
 
+%w[unknown web web\ unknown].each do |category|
+  assert('unknown category', category) do
+    _, output, status = Open3.capture3(BINARY, *category.split)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, 'unknown category'
+  end
+end
+
 assert('find') do
   output, status = Open3.capture2e(BINARY, 'find', 'localhost')
 
@@ -81,44 +90,137 @@ assert('find', 'exit with error') do
   assert_equal output&.chomp, 'root@localhost'
 end
 
-assert('unknown category') do
-  _, output, status = Open3.capture3(BINARY, 'unknown')
-
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown category'
-end
-
-assert('fifa not in PATH [find]') do
+assert('find', 'fifa not found') do
   _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'find')
 
   assert_equal 127, status.exitstatus
   assert_include output, 'command not found: fifa'
 end
 
-assert('plip not in PATH [upload]') do
-  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'upload', 'l', 'r')
+assert('upload', 'plip not found') do
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'upload', 's', 't')
 
   assert_equal 127, status.exitstatus
   assert_include output, 'command not found: plip'
 end
 
-assert('plip not in PATH [download]') do
-  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'download', 'r')
+assert('upload', 'no source given') do
+  _, output, status = Open3.capture3(BINARY, 'upload')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, 'no source given'
+end
+
+assert('upload', 'no target given') do
+  _, output, status = Open3.capture3(BINARY, 'upload', 'source')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, 'no target given'
+end
+
+%w[-d --download].each do |flag|
+  assert('upload', "unsupported option [#{flag}]") do
+    _, output, status = Open3.capture3(BINARY, 'upload', 's', 't', flag)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "unsupported option: #{flag}"
+  end
+end
+
+assert('download', 'plip not found') do
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'download', 'file')
 
   assert_equal 127, status.exitstatus
   assert_include output, 'command not found: plip'
 end
 
-assert('iss not in PATH [web]') do
+assert('download', 'no file given') do
+  _, output, status = Open3.capture3(BINARY, 'download')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, 'no file given'
+end
+
+%w[-u --uid -g --gid -m --mode].each do |flag|
+  assert('download', "unsupported option [#{flag}]") do
+    _, output, status = Open3.capture3(BINARY, 'download', 'file', flag)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "unsupported option: #{flag}"
+  end
+end
+
+assert('web start', 'iss not found') do
   _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'web', 'start')
 
   assert_equal 127, status.exitstatus
   assert_include output, 'command not found: iss'
 end
 
-assert('alpinepass not in PATH') do
-  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'export')
+%w[-r --routes].each do |flag|
+  assert('web start', "unsupported option [#{flag}]") do
+    _, output, status = Open3.capture3(BINARY, 'web', 'start', flag)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "unsupported option: #{flag}"
+  end
+end
+
+['exec', 'exec script', 'exec job'].each do |category|
+  assert(category, 'iss not found') do
+    _, output, status = Open3.capture3(DUMMY_ENV, BINARY, *category.split, '1')
+
+    assert_equal 127, status.exitstatus
+    assert_include output, 'command not found: ski'
+  end
+
+  sub_category = category.split[1] || 'command'
+
+  assert(category, "no #{sub_category} given") do
+    _, output, status = Open3.capture3(BINARY, *category.split)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "no #{sub_category} given"
+  end
+end
+
+%w[-s --script -j --job].each do |flag|
+  assert('exec', "unsupported option [#{flag}]") do
+    _, output, status = Open3.capture3(BINARY, 'exec', '1', flag)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "unsupported option: #{flag}"
+  end
+end
+
+%w[-c --command -j --job].each do |flag|
+  assert('exec script', "unsupported option [#{flag}]") do
+    _, output, status = Open3.capture3(BINARY, 'exec', 'script', '1', flag)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "unsupported option: #{flag}"
+  end
+end
+
+%w[-s --script -c --command].each do |flag|
+  assert('exec job', "unsupported option [#{flag}]") do
+    _, output, status = Open3.capture3(BINARY, 'exec', 'job', '1', flag)
+
+    assert_false status.success?, 'Process did exit cleanly'
+    assert_include output, "unsupported option: #{flag}"
+  end
+end
+
+assert('export', 'alpinepass not found') do
+  _, output, status = Open3.capture3(BINARY, 'export', 'file')
 
   assert_equal 127, status.exitstatus
   assert_include output, 'command not found: alpinepass'
+end
+
+assert('export', 'no file given') do
+  _, output, status = Open3.capture3(BINARY, 'export')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, 'no file given'
 end

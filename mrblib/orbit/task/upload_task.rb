@@ -29,6 +29,8 @@ module Orbit
       #
       # @return [ Void ]
       def run(args)
+        raise 'no source given' unless args.any?
+        raise 'no target given' unless args.size > 1
         exec 'plip', '-l', args[0], '-r', args[1], *args[2..-1], blacklist: %w[-d --download]
       end
     end

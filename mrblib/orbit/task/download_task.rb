@@ -29,6 +29,7 @@ module Orbit
       #
       # @return [ Void ]
       def run(args)
+        raise 'no file given' unless args.any?
         exec 'plip', '-d', *args, blacklist: %w[-u --uid -g --gid -m --mode]
       end
     end

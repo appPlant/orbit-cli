@@ -83,7 +83,7 @@ module Orbit
         flags = %w[-h -v --help --version]
         flags.concat(blacklist) if blacklist
 
-        flag = args&.find { |arg| flags.include? arg }
+        flag = args.find { |arg| flags.include? arg }
 
         raise "unsupported option: #{flag}" if flag
       end

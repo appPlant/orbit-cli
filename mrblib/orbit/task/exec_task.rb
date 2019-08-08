@@ -44,6 +44,7 @@ module Orbit
       #
       # @return [ Void ]
       def exec_command(args)
+        raise 'no command given' unless args.any?
         exec 'ski', '-c', *args, blacklist: %w[-s --script -j --job]
       end
 
@@ -54,6 +55,7 @@ module Orbit
       #
       # @return [ Void ]
       def exec_script(args)
+        raise 'no script given' unless args.any?
         exec 'ski', '-s', *args, blacklist: %w[-c --command -j --job]
       end
 
@@ -64,6 +66,7 @@ module Orbit
       #
       # @return [ Void ]
       def exec_job(args)
+        raise 'no job given' unless args.any?
         exec 'ski', '-j', *args, blacklist: %w[-s --script -c --command]
       end
     end

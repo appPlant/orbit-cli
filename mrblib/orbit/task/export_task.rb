@@ -29,6 +29,7 @@ module Orbit
       #
       # @return [ Void ]
       def run(args)
+        raise 'no file given' unless args.any?
         exec 'alpinepass', '-i', *args
       end
     end
