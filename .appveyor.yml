@@ -27,7 +27,10 @@ environment:
     COMPILER: C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
     TOOLCHAIN: gcc
     MRUBY_CLI_LOCAL: 1
+    ORBIT_HOME: '%APPVEYOR_BUILD_FOLDER%\bintest'
     ORBIT_PATH: '%APPVEYOR_BUILD_FOLDER%\bintest\tools'
+    ORBIT_FILE: '%APPVEYOR_BUILD_FOLDER%\Rakefile'
+    ORBIT_KEY: '%APPVEYOR_BUILD_FOLDER%\Rakefile'
   matrix:
   - MRUBY_VERSION: 2.0.1
   - MRUBY_VERSION: head

@@ -64,7 +64,9 @@ assert('env') do
 end
 
 assert('find') do
-  output, status = Open3.capture2(BINARY, 'find', 'localhost')
+  output, status = Open3.capture2e(BINARY, 'find', 'localhost')
+
+  skip('missing mock') if ENV['OS'] == 'Windows_NT'
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_equal output&.chomp, 'root@localhost'
@@ -72,6 +74,8 @@ end
 
 assert('find', 'exit with error') do
   _, output, status = Open3.capture3(BINARY, 'find', 'error')
+
+  skip('missing mock') if ENV['OS'] == 'Windows_NT'
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_equal output&.chomp, 'root@localhost'
@@ -85,31 +89,41 @@ assert('unknown category') do
 end
 
 assert('fifa not in PATH [find]') do
-  _, status = Open3.capture2e(EMPTY_ENV, BINARY, 'find')
+  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'find')
 
   assert_false status.success?, 'Process did exit cleanly'
+  assert_equal status.exitstatus, 127
+  assert_include output, 'fifa'
 end
 
 assert('plip not in PATH [upload]') do
-  _, status = Open3.capture2e(EMPTY_ENV, BINARY, 'upload', 'l', 'r')
+  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'upload', 'l', 'r')
 
   assert_false status.success?, 'Process did exit cleanly'
+  assert_equal status.exitstatus, 127
+  assert_include output, 'plip'
 end
 
 assert('plip not in PATH [download]') do
-  _, status = Open3.capture2e(EMPTY_ENV, BINARY, 'download', 'r')
+  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'download', 'r')
 
   assert_false status.success?, 'Process did exit cleanly'
+  assert_equal status.exitstatus, 127
+  assert_include output, 'plip'
 end
 
 assert('iss not in PATH [web]') do
-  _, status = Open3.capture2e(EMPTY_ENV, BINARY, 'web', 'start')
+  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'web', 'start')
 
   assert_false status.success?, 'Process did exit cleanly'
+  assert_equal status.exitstatus, 127
+  assert_include output, 'iss'
 end
 
 assert('alpinepass not in PATH') do
-  _, status = Open3.capture2e(EMPTY_ENV, BINARY, 'export')
+  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'export')
 
   assert_false status.success?, 'Process did exit cleanly'
+  assert_equal status.exitstatus, 127
+  assert_include output, 'alpinepass'
 end
