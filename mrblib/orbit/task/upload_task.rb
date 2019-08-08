@@ -29,7 +29,7 @@ module Orbit
       #
       # @return [ Void ]
       def run(args)
-        exec 'plip', '-l', args[0], '-r', args[1] *args[2..-1], blacklist: %w[-d --download]
+        exec 'plip', '-l', args[0], '-r', args[1], *args[2..-1], blacklist: %w[-d --download]
       end
     end
   end

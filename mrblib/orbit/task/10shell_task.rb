@@ -23,15 +23,6 @@
 module Orbit
   module Task
     class ShellTask
-      # Raise an error of $ORBIT_HOME is not defined.
-      #
-      # @return [ Void ]
-      def initialize
-        raise 'env ORBIT_HOME not set' unless ENV.include? 'ORBIT_HOME'
-      end
-
-      protected
-
       # Spawn a process with the specified args.
       #
       # @param [ String ] bin The name of the binary tool.

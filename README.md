@@ -20,12 +20,11 @@
 
 ## Prerequisites
 
-Add `ORBIT_HOME` and `ORBIT_PATH` to your profile:
+Add `ORBIT_PATH` to your profile:
 
-    $ export ORBIT_HOME=/path/to/orbit
-    $ export ORBIT_PATH=$ORBIT_HOME/bin/_ARCH_
+    $ export ORBIT_PATH=/path/to/orbit/bin
 
-Now copy the other tools like [fifa][fifa] to `ORBIT_PATH`.
+And copy the other tools like [fifa][fifa] to `ORBIT_PATH`.
 
 ## Installation
 

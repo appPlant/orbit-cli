@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Apache 2.0 License
 #
 # Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
@@ -20,17 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module Orbit
-  module Task
-    class ExportTask < ShellTask
-      # Invokes alpinepass with the specified args.
-      #
-      # @param [ Array<String> ] args List of task arguments.
-      #
-      # @return [ Void ]
-      def run(args)
-        exec 'alpinepass', '-i', *args
-      end
-    end
-  end
-end
+PLANET=${@:$#}
+
+if [[ $PLANET == "localhost" ]]
+  then echo `whoami`@localhost
+elif [[ $PLANET == "error" ]]
+  then echo `whoami`@localhost >&2 && exit 1
+fi

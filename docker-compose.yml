@@ -27,6 +27,10 @@ compile: &defaults
     - .:/home/mruby/code:rw
   environment:
     MRUBY_VERSION: ${MRUBY_VERSION}
+    ORBIT_HOME: /home/mruby/code/bintest
+    ORBIT_PATH: /home/mruby/code/bintest/tools
+    ORBIT_FILE: /home/mruby/code/Rakefile
+    ORBIT_KEY: /root/.ssh/dev.key
   command: rake compile
 test:
   <<: *defaults

@@ -27,6 +27,7 @@ environment:
     COMPILER: C:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64
     TOOLCHAIN: gcc
     MRUBY_CLI_LOCAL: 1
+    ORBIT_PATH: '%APPVEYOR_BUILD_FOLDER%\bintest\tools'
   matrix:
   - MRUBY_VERSION: 2.0.1
   - MRUBY_VERSION: head
