@@ -41,7 +41,7 @@ module Orbit
       # @param [ Array<String> ] args List of arguments.
       # @param [ Array<String> ] blacklist: Non-default disallowed flags.
       #
-      # @return [ Int ] The ID of the spawned process.
+      # @return [ Void ]
       def exec(bin, *args, blacklist: nil)
         raise_if_blacklisted(args, blacklist)
         Process.exec ENV.to_hash, binpath(bin), *args
@@ -89,7 +89,9 @@ module Orbit
       #
       # @return [ String ]
       def binpath(bin)
-        ENV.include?('ORBIT_PATH') ? "#{ENV['ORBIT_PATH']}/#{bin}" : bin
+        path = ENV.include?('ORBIT_PATH') ? "#{ENV['ORBIT_PATH']}/#{bin}" : bin
+        path = path + '.exe' if OS.windows?
+        path
       end
     end
   end
