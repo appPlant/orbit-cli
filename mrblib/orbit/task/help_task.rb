@@ -30,7 +30,7 @@ module Orbit
         puts <<-USAGE
 Usage: orbit [category] [options...] matchers...
 Categories:
-find                      Query planet infos
+find                      Query infos
 exec "COMMAND"            Run command
 exec job "JOB"            Run job
 exec script "PATH"        Run script

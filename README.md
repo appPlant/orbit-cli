@@ -5,11 +5,11 @@
 
     Usage: orbit [category] [options...] matchers...
     Categories:
-    find                      Query planet infos
+    find                      Query infos
     exec "COMMAND"            Run command
     exec job "JOB"            Run job
     exec script "PATH"        Run script
-    upload "TARGET" "SOURCE"  Upload file
+    upload "SOURCE" "TARGET"  Upload file
     download "SOURCE"         Download file
     web start                 Start web app
     web stop                  Stop web app
