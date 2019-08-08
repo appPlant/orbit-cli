@@ -33,7 +33,7 @@ module Orbit
       def spawn(bin, *args, blacklist: nil)
         raise_if_blacklisted(args, blacklist)
         Process.spawn ENV.to_hash, binpath(bin), *args
-      rescue RuntimeError
+      rescue SystemCallError
         abort "command not found: #{bin}", 127
       end
 
@@ -47,7 +47,7 @@ module Orbit
       def exec(bin, *args, blacklist: nil)
         raise_if_blacklisted(args, blacklist)
         Process.exec ENV.to_hash, binpath(bin), *args
-      rescue RuntimeError
+      rescue SystemCallError
         abort "command not found: #{bin}", 127
       end
 
@@ -58,6 +58,8 @@ module Orbit
       # @return [ Void ]
       def kill(pid)
         Process.kill(:INT, pid.to_i)
+      rescue SystemCallError
+        # nothing to do
       end
 
       # Waits for a child process to exit.
@@ -81,7 +83,7 @@ module Orbit
         flags = %w[-h -v --help --version]
         flags.concat(blacklist) if blacklist
 
-        flag = args.find { |arg| flags.include? arg }
+        flag = args&.find { |arg| flags.include? arg }
 
         raise "unsupported option: #{flag}" if flag
       end

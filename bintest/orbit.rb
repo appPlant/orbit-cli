@@ -24,10 +24,10 @@ require 'open3'
 require_relative '../mrblib/orbit/version'
 
 BINARY    = File.expand_path('../mruby/bin/orbit', __dir__)
-EMPTY_ENV = ENV.to_h.merge('ORBIT_PATH' => nil).freeze
+DUMMY_ENV = ENV.to_h.merge('ORBIT_PATH' => __dir__).freeze
 
 assert('version') do
-  output, status = Open3.capture2(EMPTY_ENV, BINARY, 'version')
+  output, status = Open3.capture2(BINARY, 'version')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_equal output&.chomp, Orbit::VERSION
@@ -35,7 +35,7 @@ end
 
 %w[-v --version].each do |flag|
   assert("version [#{flag}]") do
-    output, status = Open3.capture2(EMPTY_ENV, BINARY, flag)
+    output, status = Open3.capture2(BINARY, flag)
 
     assert_true status.success?, 'Process did not exit cleanly'
     assert_include output, Orbit::VERSION
@@ -45,7 +45,7 @@ end
 
 %w[help -h --help].each do |flag|
   assert("usage [#{flag}]") do
-    output, status = Open3.capture2(EMPTY_ENV, BINARY, flag)
+    output, status = Open3.capture2(BINARY, flag)
 
     assert_true status.success?, 'Process did not exit cleanly'
     assert_include output, 'Usage'
@@ -89,41 +89,36 @@ assert('unknown category') do
 end
 
 assert('fifa not in PATH [find]') do
-  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'find')
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'find')
 
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_equal status.exitstatus, 127
-  assert_include output, 'fifa'
+  assert_equal 127, status.exitstatus
+  assert_include output, 'command not found: fifa'
 end
 
 assert('plip not in PATH [upload]') do
-  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'upload', 'l', 'r')
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'upload', 'l', 'r')
 
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_equal status.exitstatus, 127
-  assert_include output, 'plip'
+  assert_equal 127, status.exitstatus
+  assert_include output, 'command not found: plip'
 end
 
 assert('plip not in PATH [download]') do
-  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'download', 'r')
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'download', 'r')
 
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_equal status.exitstatus, 127
-  assert_include output, 'plip'
+  assert_equal 127, status.exitstatus
+  assert_include output, 'command not found: plip'
 end
 
 assert('iss not in PATH [web]') do
-  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'web', 'start')
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'web', 'start')
 
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_equal status.exitstatus, 127
-  assert_include output, 'iss'
+  assert_equal 127, status.exitstatus
+  assert_include output, 'command not found: iss'
 end
 
 assert('alpinepass not in PATH') do
-  _, output, status = Open3.capture3(EMPTY_ENV, BINARY, 'export')
+  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'export')
 
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_equal status.exitstatus, 127
-  assert_include output, 'alpinepass'
+  assert_equal 127, status.exitstatus
+  assert_include output, 'command not found: alpinepass'
 end
