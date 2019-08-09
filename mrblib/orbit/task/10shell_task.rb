@@ -57,7 +57,7 @@ module Orbit
       #
       # @return [ Void ]
       def kill(pid)
-        Process.kill(:INT, pid.to_i)
+        Process.kill(:TERM, pid.to_i)
       rescue SystemCallError
         # nothing to do
       end
@@ -69,6 +69,8 @@ module Orbit
       # @return [ Process::Status ]
       def wait(pid, attempts: 10_000)
         attempts.times { return $? if Process.wait(pid, 1) && $? } && $?
+      rescue SystemCallError
+        # nothing to do
       end
 
       private
