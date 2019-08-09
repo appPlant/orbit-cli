@@ -51,13 +51,13 @@ module Orbit
         abort "command not found: #{bin}", 127
       end
 
-      # Send SIGINT to kill the process.
+      # Kill the process.
       #
       # @param [ Int ] pid The ID of the process to kill.
       #
       # @return [ Void ]
       def kill(pid)
-        Process.kill(:TERM, pid.to_i)
+        Process.kill(OS.windows? ? :INT : :TERM, pid.to_i)
       rescue SystemCallError
         # nothing to do
       end
