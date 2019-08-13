@@ -1,8 +1,12 @@
-## Release Notes: _orbit_
-
-### 1.5.0 - Initial release (not yet released)
+# Release Notes: _orbit_
 
 The command-line interface for _Orbit_.
+
+## 1.5.0
+
+Released at: UNRELEASED
+
+Initial release
 
     $ orbit -h
 
@@ -21,8 +25,6 @@ The command-line interface for _Orbit_.
     help                      Print this text
     version                   Show version number
 
-#### Usage
-
 Run a sql script on a database:
 
     $ orbit exec script "path/to/script.sql" type=db@tags:ora11
@@ -34,3 +36,5 @@ Execute a command on a server:
 Download a file from a server:
 
     $ orbit download "remote/file/path" -l "local/file/path" app-package-1 app-package-2
+
+[Full Changelog](https://github.com/appplant/orbit/compare/eeddffe3cda06958d88e4750f719ae07412c7a3c...1.5.0)
