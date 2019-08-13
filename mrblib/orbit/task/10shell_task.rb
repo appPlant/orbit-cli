@@ -90,14 +90,14 @@ module Orbit
         raise "unsupported option: #{flag}" if flag
       end
 
-      # The path of the binary. If ORBIT_PATH is defined, it is expected to be
+      # The path of the binary. If ORBIT_BIN is defined, it is expected to be
       # found under that path. Otherwise it should be available through PATH.
       #
       # @param [ String ] bin The name of the binary tool.
       #
       # @return [ String ]
       def binpath(bin)
-        path = ENV.include?('ORBIT_PATH') ? "#{ENV['ORBIT_PATH']}/#{bin}" : bin
+        path = ENV.include?('ORBIT_BIN') ? "#{ENV['ORBIT_BIN']}/#{bin}" : bin
         path = path + '.exe' if OS.windows?
         path
       end

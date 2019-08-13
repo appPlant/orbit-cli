@@ -24,7 +24,7 @@ require 'open3'
 require_relative '../mrblib/orbit/version'
 
 BINARY    = File.expand_path('../mruby/bin/orbit', __dir__)
-DUMMY_ENV = ENV.to_h.merge('ORBIT_PATH' => __dir__).freeze
+DUMMY_ENV = ENV.to_h.merge('ORBIT_BIN' => __dir__).freeze
 
 assert('version') do
   output, status = Open3.capture2(BINARY, 'version')
@@ -57,7 +57,7 @@ assert('env') do
 
   assert_true status.success?, 'Process did not exit cleanly'
 
-  %w[ORBIT_HOME ORBIT_PATH ORBIT_KEY ORBIT_FILE].each do |env|
+  %w[ORBIT_HOME ORBIT_BIN ORBIT_KEY ORBIT_FILE].each do |env|
     assert_include output, env
     assert_include output, ENV[env].to_s
   end

@@ -18,14 +18,6 @@
     help                      Print this text
     version                   Show version number
 
-## Prerequisites
-
-Add `ORBIT_PATH` to your profile:
-
-    $ export ORBIT_PATH=/path/to/orbit/bin
-
-And copy the other tools like [fifa][fifa] to `ORBIT_PATH`.
-
 ## Installation
 
 Download the latest version from the [release page][releases] and add the executable to your `PATH`.
@@ -93,7 +85,6 @@ Made with :heart: in Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
-[fifa]: https://github.com/appplant/fifa
 [releases]: https://github.com/appplant/orbit/releases
 [license]: http://opensource.org/licenses/Apache-2.0
 [appplant]: www.appplant.de

@@ -27,7 +27,7 @@ module Orbit
       #
       # @return [ Void ]
       def run(_)
-        %w[ORBIT_HOME ORBIT_PATH ORBIT_FILE ORBIT_KEY].each do |env|
+        %w[ORBIT_HOME ORBIT_BIN ORBIT_FILE ORBIT_KEY].each do |env|
           puts "#{env}=#{ENV[env]}"
         end
       end
