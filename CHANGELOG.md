@@ -4,7 +4,7 @@ The command-line interface for _Orbit_.
 
 ## 1.5.0
 
-Released at: UNRELEASED
+Released at: 13.08.2019
 
 Initial release
 
