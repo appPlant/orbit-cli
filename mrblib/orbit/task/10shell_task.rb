@@ -57,7 +57,7 @@ module Orbit
       #
       # @return [ Void ]
       def kill(pid)
-        Process.kill(OS.windows? ? :INT : :TERM, pid.to_i)
+        Process.kill(OS.windows? ? :KILL : :TERM, pid.to_i)
       rescue SystemCallError
         # nothing to do
       end
