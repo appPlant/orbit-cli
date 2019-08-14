@@ -68,7 +68,7 @@ module Orbit
       #
       # @return [ Process::Status ]
       def wait(pid, attempts: 2500)
-        attempts.times { return $? if Process.wait(pid, 1) && $? } && $?
+        attempts.times { return $? if Process.wait(pid, Process::WNOHANG) && $? } && $?
       rescue SystemCallError
         # nothing to do
       end
