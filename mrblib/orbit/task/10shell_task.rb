@@ -67,7 +67,7 @@ module Orbit
       # @param [ Int ] pid The ID of the process to kill.
       #
       # @return [ Process::Status ]
-      def wait(pid, attempts: 10_000)
+      def wait(pid, attempts: 2500)
         attempts.times { return $? if Process.wait(pid, 1) && $? } && $?
       rescue SystemCallError
         # nothing to do
