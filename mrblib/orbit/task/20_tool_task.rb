@@ -22,69 +22,58 @@
 
 module Orbit
   module Task
-    class ShellTask
+    class ToolTask < ShellTask
       # Spawn a process with the specified args.
       #
       # @param [ String ] bin The name of the binary tool.
       # @param [ Array<String> ] args List of arguments.
+      # @param [ Array<String> ] blacklist: Non-default disallowed flags.
       #
       # @return [ Int ] The ID of the spawned process.
-      def spawn(bin, *args)
-        Process.spawn(ENV.to_hash, bin, *args)
-      rescue SystemCallError
-        abort "command not found: #{bin}", 127
+      def spawn(bin, *args, blacklist: nil)
+        raise_if_blacklisted(args, blacklist)
+        super(binpath(bin), *args)
       end
 
       # Replace the process by running the given external command.
       #
       # @param [ String ] bin The name of the binary tool.
       # @param [ Array<String> ] args List of arguments.
+      # @param [ Array<String> ] blacklist: Non-default disallowed flags.
       #
       # @return [ Void ]
-      def exec(bin, *args)
-        Process.exec(ENV.to_hash, bin, *args)
-      rescue SystemCallError
-        abort "command not found: #{bin}", 127
+      def exec(bin, *args, blacklist: nil)
+        raise_if_blacklisted(args, blacklist)
+        super(binpath(bin), *args)
       end
 
-      # Kill the process.
+      private
+
+      # Raises a runtime error if args includes a blacklisted flag.
       #
-      # @param [ Int ] pid The ID of the process to kill.
+      # @param [ Array<String> ] args List of arguments.
+      # @param [ Array<String> ] blacklist Non-default disallowed flags.
       #
       # @return [ Void ]
-      def kill(pid)
-        Process.kill(OS.windows? ? :KILL : :TERM, pid.to_i)
-      rescue SystemCallError
-        nil
+      def raise_if_blacklisted(args, blacklist)
+        flags = %w[-h -v --help --version]
+        flags.concat(blacklist) if blacklist
+
+        flag = args.find { |arg| flags.include? arg }
+
+        raise "unsupported option: #{flag}" if flag
       end
 
-      # Waits for a child process to exit.
+      # The path of the binary. If ORBIT_BIN is defined, it is expected to be
+      # found under that path. Otherwise it should be available through PATH.
       #
-      # @param [ Int ] pid The ID of the process to kill.
-      #
-      # @return [ Process::Status ]
-      def wait(pid, attempts: 2500)
-        attempts.times { return $? if Process.wait(pid, Process::WNOHANG) && $? } && $?
-      rescue SystemCallError
-        nil
-      end
-
-      # Change dir to ORBIT_HOME and exec the code block.
-      #
-      # @param [ Proc ] block The code to execute.
-      #
-      # @return [ Void ]
-      def chdir_orbit(&block)
-        Dir.chdir(orbit_home, &block)
-      end
-
-      # Return the value of ORBIT_HOME.
+      # @param [ String ] bin The name of the binary tool.
       #
       # @return [ String ]
-      def orbit_home
-        ENV.fetch('ORBIT_HOME')
-      rescue KeyError
-        abort '$ORBIT_HOME not set'
+      def binpath(bin)
+        path = ENV.include?('ORBIT_BIN') ? "#{ENV['ORBIT_BIN']}/#{bin}" : bin
+        path += '.exe' if OS.windows?
+        path
       end
     end
   end

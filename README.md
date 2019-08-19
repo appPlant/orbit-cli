@@ -13,6 +13,9 @@
     download "SOURCE"         Download file
     web start                 Start web app
     web stop                  Stop web app
+    docker build              Build container
+    docker start              Start container
+    docker stop               Stop container
     export "PATH"             Convert KDB file
     env                       Show env vars
     help                      Print this text
@@ -35,6 +38,12 @@ Execute a command on a server:
 Download a file from a server:
 
     $ orbit download "remote/file/path" -l "local/file/path" app-package-1 app-package-2
+
+Start web app from inside a docker container:
+
+    $ orbit docker start
+
+__Note:__ `$ORBIT_HOME/docker_compose.yml` takes precedence over `$ORBIT_HOME/Dockerfile.yml`.
 
 ## Development
 

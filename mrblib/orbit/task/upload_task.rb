@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class UploadTask < ShellTask
+    class UploadTask < ToolTask
       # Upload a file through the plip tool.
       #
       # @param [ Array<String> ] args List of task arguments.
@@ -31,6 +31,7 @@ module Orbit
       def run(args)
         raise 'no source given' unless args.any?
         raise 'no target given' unless args.size > 1
+
         exec 'plip', '-l', args[0], '-r', args[1], *args[2..-1], blacklist: %w[-d --download]
       end
     end

@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class FindTask < ShellTask
+    class FindTask < ToolTask
       # Invokes fifa with the specified args.
       #
       # @param [ Array<String> ] args List of task arguments.

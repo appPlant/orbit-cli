@@ -31,7 +31,7 @@ module Orbit
       create_task(args[0]).run(args[1..-1])
     end
 
-    private
+    # rubocop:disable AbcSize, CyclomaticComplexity, MethodLength
 
     # Find the task class by keyword name.
     #
@@ -60,9 +60,13 @@ module Orbit
         Task::DownloadTask.new
       when 'export'
         Task::ExportTask.new
+      when 'docker'
+        Task::DockerTask.new
       else
         raise "unknown category: #{name}"
       end
     end
+
+    # rubocop:enable AbcSize, CyclomaticComplexity, MethodLength
   end
 end

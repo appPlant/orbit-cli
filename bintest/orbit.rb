@@ -63,7 +63,7 @@ assert('env') do
   end
 end
 
-%w[unknown web web\ unknown].each do |category|
+%w[unknown web web\ unknown docker docker\ unknown].each do |category|
   assert('unknown category', category) do
     _, output, status = Open3.capture3(BINARY, *category.split)
 
@@ -94,14 +94,14 @@ assert('find', 'fifa not found') do
   _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'find')
 
   assert_equal 127, status.exitstatus
-  assert_include output, 'command not found: fifa'
+  assert_include output, "command not found: #{DUMMY_ENV['ORBIT_BIN']}/fifa"
 end
 
 assert('upload', 'plip not found') do
-  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'upload', 's', 't')
+  _, output, status = Open3.capture3(BINARY, 'upload', 's', 't')
 
   assert_equal 127, status.exitstatus
-  assert_include output, 'command not found: plip'
+  assert_include output, "command not found: #{ENV['ORBIT_BIN']}/plip"
 end
 
 assert('upload', 'no source given') do
@@ -128,10 +128,10 @@ end
 end
 
 assert('download', 'plip not found') do
-  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'download', 'file')
+  _, output, status = Open3.capture3(BINARY, 'download', 'file')
 
   assert_equal 127, status.exitstatus
-  assert_include output, 'command not found: plip'
+  assert_include output, "command not found: #{ENV['ORBIT_BIN']}/plip"
 end
 
 assert('download', 'no file given') do
@@ -151,10 +151,10 @@ end
 end
 
 assert('web start', 'iss not found') do
-  _, output, status = Open3.capture3(DUMMY_ENV, BINARY, 'web', 'start')
+  _, output, status = Open3.capture3(BINARY, 'web', 'start')
 
   assert_equal 127, status.exitstatus
-  assert_include output, 'command not found: iss'
+  assert_include output, "command not found: #{ENV['ORBIT_BIN']}/iss"
 end
 
 %w[-r --routes].each do |flag|
@@ -168,10 +168,10 @@ end
 
 ['exec', 'exec script', 'exec job'].each do |category|
   assert(category, 'iss not found') do
-    _, output, status = Open3.capture3(DUMMY_ENV, BINARY, *category.split, '1')
+    _, output, status = Open3.capture3(BINARY, *category.split, '1')
 
     assert_equal 127, status.exitstatus
-    assert_include output, 'command not found: ski'
+    assert_include output, "command not found: #{ENV['ORBIT_BIN']}/ski"
   end
 
   sub_category = category.split[1] || 'command'
@@ -215,7 +215,7 @@ assert('export', 'alpinepass not found') do
   _, output, status = Open3.capture3(BINARY, 'export', 'file')
 
   assert_equal 127, status.exitstatus
-  assert_include output, 'command not found: alpinepass'
+  assert_include output, "command not found: #{ENV['ORBIT_BIN']}/alpinepass"
 end
 
 assert('export', 'no file given') do

@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class DownloadTask < ShellTask
+    class DownloadTask < ToolTask
       # Download a file through the plip tool.
       #
       # @param [ Array<String> ] args List of task arguments.
@@ -30,6 +30,7 @@ module Orbit
       # @return [ Void ]
       def run(args)
         raise 'no file given' unless args.any?
+
         exec 'plip', '-d', *args, blacklist: %w[-u --uid -g --gid -m --mode]
       end
     end

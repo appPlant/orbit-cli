@@ -22,7 +22,7 @@
 
 module Orbit
   module Task
-    class WebTask < ShellTask
+    class WebTask < ToolTask
       # Start or stop the web app.
       #
       # @param [ Array<String> ] args List of task arguments.
@@ -60,8 +60,8 @@ module Orbit
       # @return [ Void ]
       def stop
         kill File.read("#{ENV['ORBIT_HOME']}/tmp/pids/server.pid")
-      rescue
-        # Either server.pid or the process doesn't exist
+      rescue IOError
+        nil
       end
     end
   end

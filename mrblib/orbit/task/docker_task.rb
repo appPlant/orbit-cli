@@ -22,53 +22,81 @@
 
 module Orbit
   module Task
-    class ExecTask < ToolTask
-      # Invokes ski with the specified args.
+    class DockerTask < ShellTask
+      # Docker utility tasks.
       #
       # @param [ Array<String> ] args List of task arguments.
       #
       # @return [ Void ]
       def run(args)
         case args[0]
-        when 'script' then exec_script(args[1..-1])
-        when 'job'    then exec_job(args[1..-1])
-        else exec_command(args)
+        when 'build' then build(args[1..-1])
+        when 'start' then start(args[1..-1])
+        when 'stop'  then stop(args[1..-1])
+        else raise "unknown category #{args[0]}"
         end
       end
 
       private
 
-      # Execute the command.
+      # Build image.
       #
       # @param [ Array<String> ] args List of task arguments.
       #
       # @return [ Void ]
-      def exec_command(args)
-        raise 'no command given' unless args.any?
-
-        exec 'ski', '-c', *args, blacklist: %w[-s --script -j --job]
+      def build(args)
+        docker 'build', '-t', 'orbit', *args, '.' unless docker_compose?
       end
 
-      # Execute the script.
+      # Start container.
       #
       # @param [ Array<String> ] args List of task arguments.
       #
       # @return [ Void ]
-      def exec_script(args)
-        raise 'no script given' unless args.any?
-
-        exec 'ski', '-s', *args, blacklist: %w[-c --command -j --job]
+      def start(args)
+        if docker_compose?
+          docker_compose 'up', '-d', *args, 'orbit'
+        else
+          docker 'run', '--rm', '--name', 'orbit', '-d', '-v', "#{orbit_home}:/home/orbit", '-w', '/home/orbit', '-p', '1974:1974', *args, 'orbit'
+        end
       end
 
-      # Execute the job.
+      # Stop container.
       #
       # @param [ Array<String> ] args List of task arguments.
       #
       # @return [ Void ]
-      def exec_job(args)
-        raise 'no job given' unless args.any?
+      def stop(args)
+        if docker_compose?
+          docker_compose 'down', *args
+        else
+          docker 'stop', *args, 'orbit'
+        end
+      end
 
-        exec 'ski', '-j', *args, blacklist: %w[-s --script -c --command]
+      # Execute docker with the given arguments.
+      #
+      # @param [ Array<String> ] *args List of arguments.
+      #
+      # @return [ Void ]
+      def docker(*args)
+        chdir_orbit { exec 'docker', *args }
+      end
+
+      # Execute docker-compose with the given arguments.
+      #
+      # @param [ Array<String> ] *args List of arguments.
+      #
+      # @return [ Void ]
+      def docker_compose(*args)
+        chdir_orbit { exec 'docker-compose', *args }
+      end
+
+      # If the docker-compose.yml file should be used instead.
+      #
+      # @return [ Boolean ]
+      def docker_compose?
+        File.exist? "#{orbit_home}/docker-compose.yml"
       end
     end
   end

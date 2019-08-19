@@ -38,6 +38,9 @@ upload "SOURCE" "TARGET"  Upload file
 download "SOURCE"         Download file
 web start                 Start web app
 web stop                  Stop web app
+docker build              Build container
+docker start              Start container
+docker stop               Stop container
 export "PATH"             Convert KDB file
 env                       Show env vars
 help                      Print this text

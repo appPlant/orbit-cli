@@ -45,3 +45,6 @@ Metrics/LineLength:
 Metrics/AbcSize:
   Enabled: true
   Max: 11
+
+Documentation:
+  Enabled: false
