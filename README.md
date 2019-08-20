@@ -1,5 +1,4 @@
-# orbit - The Command-Line Interface for _Orbit_ <br> 
-[![GitHub release](https://img.shields.io/github/release/appPlant/orbit.svg)](https://github.com/appplant/orbit/releases) [![Build Status](https://travis-ci.com/appPlant/orbit.svg?branch=master)](https://travis-ci.com/appPlant/orbit) [![Build status](https://ci.appveyor.com/api/projects/status/y35hwhpf4w51nc9e/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/orbit/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/69da9029f3782acc97a4/maintainability)](https://codeclimate.com/github/appPlant/orbit/maintainability)
+# orbit - The Command-Line Interface for _Orbit_ <br> ![GitHub release (latest by date)](https://img.shields.io/github/v/release/appplant/orbit) [![Build Status](https://travis-ci.com/appPlant/orbit.svg?branch=master)](https://travis-ci.com/appPlant/orbit) [![Build status](https://ci.appveyor.com/api/projects/status/y35hwhpf4w51nc9e/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/orbit/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/69da9029f3782acc97a4/maintainability)](https://codeclimate.com/github/appPlant/orbit/maintainability)
 
     $ orbit -h
 
