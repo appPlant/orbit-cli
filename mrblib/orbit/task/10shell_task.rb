@@ -30,7 +30,7 @@ module Orbit
       #
       # @return [ Int ] The ID of the spawned process.
       def spawn(bin, *args)
-        Process.spawn(ENV.to_hash, bin, *args)
+        Process.spawn(bin, *args)
       rescue SystemCallError
         abort "command not found: #{bin}", 127
       end
@@ -42,7 +42,7 @@ module Orbit
       #
       # @return [ Void ]
       def exec(bin, *args)
-        Process.exec(ENV.to_hash, bin, *args)
+        Process.exec(bin, *args)
       rescue SystemCallError
         abort "command not found: #{bin}", 127
       end
