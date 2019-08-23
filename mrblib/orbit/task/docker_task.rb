@@ -96,7 +96,9 @@ module Orbit
       #
       # @return [ Boolean ]
       def docker_compose?
-        File.exist? "#{orbit_home}/docker-compose.yml"
+        File.open("#{orbit_home}/docker-compose.yml", 'r') { true }
+      rescue IOError
+        false
       end
     end
   end
