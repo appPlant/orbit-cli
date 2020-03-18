@@ -21,5 +21,5 @@
 # SOFTWARE.
 
 module Orbit
-  VERSION = '1.5.1-dev'.freeze
+  VERSION = '1.5.1'.freeze
 end
