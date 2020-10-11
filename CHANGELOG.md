@@ -16,11 +16,11 @@ Released at: 18.03.2020
 
 5. Compiled with `MRB_WITHOUT_FLOAT`
 
-6. Compiled binary for OSX build with MacOSX10.15 SDK
+6. Compiled binary for OSX build with MacOSX10.15 SDK.
 
-7. Upgraded to mruby 2.1.0.
+7. Upgraded to mruby 2.1.0
 
-[Full Changelog](https://github.com/appplant/orbit/compare/1.5.0...HEAD)
+[Full Changelog](https://github.com/appplant/orbit/compare/1.5.0...1.5.1)
 
 ## 1.5.0
 
