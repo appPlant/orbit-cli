@@ -2,9 +2,20 @@
 
 The command-line interface for _Orbit_.
 
+## 1.5.2
+
+Released at:
+
+1. Upgraded to mruby 3.0.0
+
+[Full Changelog](https://github.com/katzer/orbit/compare/1.5.1...master)
+
 ## 1.5.1
 
 Released at: 18.03.2020
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Added `docker start` and `docker stop` categories.
 
@@ -20,7 +31,10 @@ Released at: 18.03.2020
 
 7. Upgraded to mruby 2.1.0
 
+</p>
+
 [Full Changelog](https://github.com/katzer/orbit/compare/1.5.0...1.5.1)
+</details>
 
 ## 1.5.0
 
