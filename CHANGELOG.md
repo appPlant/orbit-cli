@@ -20,7 +20,7 @@ Released at: 18.03.2020
 
 7. Upgraded to mruby 2.1.0
 
-[Full Changelog](https://github.com/appplant/orbit/compare/1.5.0...1.5.1)
+[Full Changelog](https://github.com/katzer/orbit/compare/1.5.0...1.5.1)
 
 ## 1.5.0
 
@@ -62,5 +62,5 @@ Download a file from a server:
 
 </p>
 
-[Full Changelog](https://github.com/appplant/orbit/compare/eeddffe3cda06958d88e4750f719ae07412c7a3c...1.5.0)
+[Full Changelog](https://github.com/katzer/orbit/compare/eeddffe3cda06958d88e4750f719ae07412c7a3c...1.5.0)
 </details>

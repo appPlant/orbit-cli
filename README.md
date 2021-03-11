@@ -1,4 +1,4 @@
-# orbit - The Command-Line Interface for _Orbit_ <br> ![GitHub release (latest by date)](https://img.shields.io/github/v/release/appplant/orbit) [![Build Status](https://travis-ci.com/appPlant/orbit.svg?branch=master)](https://travis-ci.com/appPlant/orbit) [![Build status](https://ci.appveyor.com/api/projects/status/y35hwhpf4w51nc9e/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/orbit/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/69da9029f3782acc97a4/maintainability)](https://codeclimate.com/github/appPlant/orbit/maintainability)
+# orbit - The Command-Line Interface for _Orbit_ <br> ![GitHub release (latest by date)](https://img.shields.io/github/v/release/katzer/orbit) [![Build Status](https://travis-ci.com/katzer/orbit.svg?branch=master)](https://travis-ci.com/katzer/orbit) [![Build status](https://ci.appveyor.com/api/projects/status/y35hwhpf4w51nc9e/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/orbit/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/69da9029f3782acc97a4/maintainability)](https://codeclimate.com/github/katzer/orbit/maintainability)
 
     $ orbit -h
 
@@ -48,7 +48,7 @@ __Note:__ `$ORBIT_HOME/docker_compose.yml` takes precedence over `$ORBIT_HOME/Do
 
 Clone the repo:
     
-    $ git clone https://github.com/appplant/orbit.git && cd orbit/
+    $ git clone https://github.com/katzer/orbit.git && cd orbit/
 
 Install the dependencies:
 
@@ -77,7 +77,7 @@ For the complete list of build tasks:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/appplant/orbit.
+Bug reports and pull requests are welcome on GitHub at https://github.com/katzer/orbit.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -93,6 +93,6 @@ Made with :heart: in Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
-[releases]: https://github.com/appplant/orbit/releases
+[releases]: https://github.com/katzer/orbit/releases
 [license]: http://opensource.org/licenses/Apache-2.0
 [appplant]: www.appplant.de
