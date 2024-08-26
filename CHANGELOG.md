@@ -6,7 +6,7 @@ The command-line interface for _Orbit_.
 
 Released at:
 
-1. Upgraded to mruby 3.1.0
+1. Upgraded to mruby 3.2.0
 
 2. Compiled binary for OSX build with MacOSX11.3 SDK (Darwin19)
 

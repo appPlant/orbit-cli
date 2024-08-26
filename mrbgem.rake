@@ -29,9 +29,10 @@ MRuby::Gem::Specification.new('orbit') do |spec|
   spec.bins    = ['orbit']
 
   spec.add_dependency 'mruby-print',   core: 'mruby-print'
+  spec.add_dependency 'mruby-exit',    core: 'mruby-exit'
   spec.add_dependency 'mruby-env',     mgem: 'mruby-env'
   spec.add_dependency 'mruby-process', mgem: 'mruby-process2'
   spec.add_dependency 'mruby-tiny-io', mgem: 'mruby-tiny-io'
-  spec.add_dependency 'mruby-dir',     mgem: 'mruby-dir'
+  spec.add_dependency 'mruby-dir',     core: 'mruby-dir'
   spec.add_dependency 'mruby-os',      mgem: 'mruby-os'
 end

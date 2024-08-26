@@ -46,8 +46,10 @@ module Orbit
       def start(args)
         dir = "#{ENV['ORBIT_HOME']}/tmp"
         pid = spawn 'iss', *args, blacklist: %w[-r --routes]
+        exitcode = wait(pid)&.exitstatus.to_i
 
-        return if wait(pid)&.exitstatus.to_i != 0
+        puts "command not found: #{ENV['ORBIT_BIN']}/iss" if exitcode == 127
+        exit!(exitcode) if exitcode != 0
 
         Dir.mkdir(dir) unless Dir.exist?(dir)
         Dir.mkdir(dir) unless Dir.exist?(dir = "#{dir}/pids")

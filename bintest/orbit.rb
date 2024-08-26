@@ -151,7 +151,7 @@ end
 end
 
 assert('web start', 'iss not found') do
-  _, output, status = Open3.capture3(BINARY, 'web', 'start')
+  output, status = Open3.capture2e(BINARY, 'web', 'start')
 
   assert_equal 127, status.exitstatus
   assert_include output, "command not found: #{ENV['ORBIT_BIN']}/iss"
