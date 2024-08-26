@@ -4,7 +4,7 @@ The command-line interface for _Orbit_.
 
 ## 1.5.2
 
-Released at:
+Released at: 28.08.2024
 
 1. Upgraded to mruby 3.2.0
 
@@ -14,7 +14,7 @@ Released at:
 
 4. Fixed `orbit env` to only print defined environment variables.
 
-[Full Changelog](https://github.com/katzer/orbit/compare/1.5.1...master)
+[Full Changelog](https://github.com/katzer/orbit/compare/1.5.1...1.5.2)
 
 ## 1.5.1
 
