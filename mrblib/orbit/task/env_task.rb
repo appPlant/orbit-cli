@@ -28,7 +28,7 @@ module Orbit
       # @return [ Void ]
       def run(_)
         %w[ORBIT_HOME ORBIT_BIN ORBIT_FILE ORBIT_KEY].each do |env|
-          puts "#{env}=#{ENV[env]}"
+          puts "#{env}=#{ENV[env]}" if ENV.include?(env)
         end
       end
     end

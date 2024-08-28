@@ -12,6 +12,8 @@ Released at:
 
 3. Added binary for `arm64-apple-darwin19` target
 
+4. Fixed `orbit env` to only print defined environment variables.
+
 [Full Changelog](https://github.com/katzer/orbit/compare/1.5.1...master)
 
 ## 1.5.1
